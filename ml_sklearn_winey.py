@@ -9,3 +9,8 @@ from sklearn.pipeline import make_pipeline
 from sklearn.model_selection import GridSearchCV
 from sklearn.metrics import mean_squared_error, r2_score
 from sklearn.externals import joblib
+
+# 2) Load data from remote url
+dataset_url = 'http://mlr.cs.umass.edu/ml/machine-learning-databases/wine-quality/winequality-red.csv'
+data = pd.read_csv(dataset_url)
+print data.head()
