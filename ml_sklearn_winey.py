@@ -41,9 +41,18 @@ X_train, X_test, y_train, y_test = train_test_split(X, y,
 
 # Better way, preprocess the data using Scikit-Learn Transformer API (training data + model same way, and sounds much cooler)
 # First, fit the transformer API
-scaler = preprocessing.StandardScaler().fit(X_train)
+# scaler = preprocessing.StandardScaler().fit(X_train)
 
 # Apply that transformer to the training data
-X_train_scaled = scaler.transform(X_train)
+ #X_train_scaled = scaler.transform(X_train)
 # print X_train_scaled.mean(axis=0)
-print X_train_scaled.std(axis=0)
+# print X_train_scaled.std(axis=0)
+
+# Then apply that same tansformer to test data
+# X_test_scaled = scaler.transform(X_test)
+# print X_test_scaled.mean(axis=0)
+# print X_test_scaled.std(axis=0)
+
+# An even better way, which sets up a cross validation pipeline that transforms that data using StandardScaler, and fits a model using RandomForestRegressor
+pipeline = make_pipeline(preprocessing.StandardScaler(),
+                         RandomForestRegressor(n_estimators=100))
