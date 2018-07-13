@@ -33,3 +33,8 @@ X_train, X_test, y_train, y_test = train_test_split(X, y,
                                                     test_size=0.2,
                                                     random_state=123,
                                                     stratify=y)
+
+# 4) Data preprocessing
+# Preprocess the data using Scikit-Learn preprocessing, only for the training set
+X_train_scaled = preprocessing.scale(X_train)
+print X_train_scaled.std(axis=0)
