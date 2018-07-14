@@ -65,3 +65,10 @@ pipeline = make_pipeline(preprocessing.StandardScaler(),
 hyperparameters = { 'randomforestregressor__max_features' : ['auto', 'sqrt', 'log2'],
                   'randomforestregressor__max_depth': [None, 5, 3, 1]}
 
+# 7. Tune the model using a cross-validation pipeline
+# Split data into folds (equal parts)
+clf = GridSearchCV(pipeline, hyperparameters, cv=10)
+# Fit the model
+clf.fit(X_train, y_train)
+# Print out the best parameters results
+print clf.best_params_
