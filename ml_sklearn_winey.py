@@ -59,5 +59,9 @@ pipeline = make_pipeline(preprocessing.StandardScaler(),
 
 # 4) Declare hyperparameters
 # List hyperparameters that can be tuned
-print pipeline.get_params()
+# print pipeline.get_params()
+
+# Declare which hyperparameters to tune through cross-validation
+hyperparameters = { 'randomforestregressor__max_features' : ['auto', 'sqrt', 'log2'],
+                  'randomforestregressor__max_depth': [None, 5, 3, 1]}
 
