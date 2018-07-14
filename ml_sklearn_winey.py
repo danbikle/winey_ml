@@ -56,3 +56,8 @@ X_train, X_test, y_train, y_test = train_test_split(X, y,
 # An even better way, which sets up a cross validation pipeline that transforms that data using StandardScaler, and fits a model using RandomForestRegressor
 pipeline = make_pipeline(preprocessing.StandardScaler(),
                          RandomForestRegressor(n_estimators=100))
+
+# 4) Declare hyperparameters
+# List hyperparameters that can be tuned
+print pipeline.get_params()
+
