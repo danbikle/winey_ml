@@ -72,3 +72,7 @@ clf = GridSearchCV(pipeline, hyperparameters, cv=10)
 clf.fit(X_train, y_train)
 # Print out the best parameters results
 print clf.best_params_
+
+# 8. Refit the model using the entire training set via GridSearchCV, for performance improvements
+# Check if model will be retrained (if result from below is "True" you are good)
+print clf.refit
