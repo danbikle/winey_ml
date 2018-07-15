@@ -81,4 +81,7 @@ clf.fit(X_train, y_train)
 # Predict new data set
 y_pred = clf.predict(X_test)
 
+# Use metrics from before to evaluate performance of the model
+# For R-squared
+print r2_score(y_test, y_pred)
 
