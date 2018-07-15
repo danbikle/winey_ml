@@ -57,7 +57,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y,
 pipeline = make_pipeline(preprocessing.StandardScaler(),
                          RandomForestRegressor(n_estimators=100))
 
-# 4) Declare hyperparameters
+# 5) Declare hyperparameters that you want to tune
 # List hyperparameters that can be tuned
 # print pipeline.get_params()
 
@@ -65,14 +65,20 @@ pipeline = make_pipeline(preprocessing.StandardScaler(),
 hyperparameters = { 'randomforestregressor__max_features' : ['auto', 'sqrt', 'log2'],
                   'randomforestregressor__max_depth': [None, 5, 3, 1]}
 
-# 7. Tune the model using a cross-validation pipeline
+# 6) Tune the model using a cross-validation pipeline
 # Split data into folds (equal parts)
 clf = GridSearchCV(pipeline, hyperparameters, cv=10)
 # Fit the model
 clf.fit(X_train, y_train)
 # Print out the best parameters results
-print clf.best_params_
+# print clf.best_params_
 
-# 8. Refit the model using the entire training set via GridSearchCV, for performance improvements
+# 7) Refit the model using the entire training set via GridSearchCV, for performance improvements
 # Check if model will be retrained (if result from below is "True" you are good)
-print clf.refit
+# print clf.refit
+
+# 8) Evaluate the model pipeline on the test data
+# Predict new data set
+y_pred = clf.predict(X_test)
+
+
