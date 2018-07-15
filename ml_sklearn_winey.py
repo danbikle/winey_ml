@@ -83,5 +83,8 @@ y_pred = clf.predict(X_test)
 
 # Use metrics from before to evaluate performance of the model
 # For R-squared
-print r2_score(y_test, y_pred)
+# print r2_score(y_test, y_pred)
+
+# For mean squared error (MSE)
+print mean_squared_error(y_test, y_pred)
 
