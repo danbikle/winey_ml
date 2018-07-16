@@ -88,3 +88,6 @@ y_pred = clf.predict(X_test)
 # For mean squared error (MSE)
 print mean_squared_error(y_test, y_pred)
 
+# 9) Save model for future and load it back
+# joblib.dump(clf, 'rf_regressor.pkl')
+# To load: clf2 = joblib.load('rf_regressor.pkl')
