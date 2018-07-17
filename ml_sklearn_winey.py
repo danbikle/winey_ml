@@ -92,7 +92,9 @@ y_pred = clf.predict(X_test)
 # For feature importance with more general assumptions
 regr = RandomForestRegressor(max_depth=2, random_state=0)
 regr.fit(X, y)
-print(regr.feature_importances_)
+# print(regr.feature_importances_)
+# For prediction
+print(regr.predict([[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]))
 
 # 10) Save model for future and load it back
 # joblib.dump(clf, 'rf_regressor.pkl')
