@@ -86,8 +86,14 @@ y_pred = clf.predict(X_test)
 # print r2_score(y_test, y_pred)
 
 # For mean squared error (MSE)
-print mean_squared_error(y_test, y_pred)
+# print mean_squared_error(y_test, y_pred)
 
-# 9) Save model for future and load it back
+# 9) More ways to evaluate the model
+# For feature importance with more general assumptions
+regr = RandomForestRegressor(max_depth=2, random_state=0)
+regr.fit(X, y)
+print(regr.feature_importances_)
+
+# 10) Save model for future and load it back
 # joblib.dump(clf, 'rf_regressor.pkl')
 # To load: clf2 = joblib.load('rf_regressor.pkl')
