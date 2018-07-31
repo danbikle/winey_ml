@@ -1,0 +1,90 @@
+qa.txt
+
+q: - When I ran random forest regressor with some hyperparameters I got:
+     r2 score: 0.45
+     mean squared error: 0.35
+     For r2, Higher is better?
+a: Yes, Higher is better and 1.0 is the upper limit.
+One way to get r2-score of 1.0 is to fit a linear regression model to data which sits exactly on a straight line.
+Then, use that model to predict the data you learned from.
+
+q: How do I know if mean squared error: 0.35 is "good"?
+a: You don't know. That error is only meaningful when compared to other errors.
+   On the other hand, r2 by itself is meaningful.
+   An r2 score of 0.45 is not very good.
+   I'd prefer to see a score near or above 0.7
+
+q:
+When I output the feature importance using this syntax:
+regr = RandomForestRegressor(max_depth=2, random_state=0)
+regr.fit(X, y)
+print(regr.feature_importances_)
+
+I see this:
+[ 0. 0.07954012 0. 0. 0. 0. 0. 0. 0. 0.1999666 0.72049328]
+
+Based on reading the SKL doc the above list is telling me that features (in sequential
+order) with zeroes are neither bad nor good.
+
+The elements with non-zero values like 0.0795 correspond to "informative" features.
+
+But what is it informing me of?
+
+a: That list of values is informing us which features in X have the ability to change y.
+I see that the last feature has the most weight.
+I usually explain this with a simple equation:
+
+y = w * x
+
+If w is zero then it is impossible for x to change y.
+If w is 1 then y will double if x doubles.
+If w is 0.72 then y will increase 72% if x increases 100%.
+
+The above list forces me to assume a relationship like this (but not exactly):
+
+y= w0 + w1*x1 + w2*x2 + w3*x3 + w4*x4 + w5*x5 + w6*x6 + w7*x7 + w8*x8 + w9*x9 + w10*x10 + w11*x11
+and w1 == w3 == w4 == w5 == w6 == w7 == w8 == w9 == 0
+so
+y= w0 + w2*x2 + w10*x10 + w11*x11
+
+When I look at the column names of winequality-red.csv,
+I can translate the above expression to plain English:
+Wine Quality mostly depends on values of "sulphates" and "alcohol".
+
+q:
+When I output the prediction like this
+print(regr.predict([[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]))
+I get this output
+[ 5.26825393]
+and I really have no idea what this means. Is it a good or bad predictor?
+
+a: I see the value of 5.268 as the "bias" of the model.
+If I assume that
+prediction == y = w0 + w2*x2 + w10*x10 + x11*x11
+I see that the bias is w0 is 5.268
+
+I often describe bias as the prediction you get from the model when
+you refuse to give the model information it can use to make a prediction.
+
+For example if someone asks me to predict the temperature of Mars right now,
+I'd collect all Mars-temperatures I can find using google.
+Then I would average them and return that average as my prediction.
+
+q:
+Can you suggest how I should think about these results?
+What are some next steps that it implies?
+Run different regressors and try to get better results?
+Diff hyperparameters? It's not a big dataset. 
+
+a: I suggest you study Sec 3.1 and 3.2 of this book:
+http://www-bcf.usc.edu/~gareth/ISL/ISLR%20Seventh%20Printing.pdf
+I suggest that you study RandomForestRegressor
+after you generate wine-quality predictions using this class:
+sklearn.linear_model.LinearRegression()
+I offer simple examples of LinearRegression() in demo1,2,3,4.py
+
+
+
+
+
+
